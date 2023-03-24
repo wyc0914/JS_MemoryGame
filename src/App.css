@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #F2888B;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,4 +11,22 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Title {
+  font-family: "Lucida Console", "Courier New", monospace;
+  color:yellow;
+}
+
+.button {
+  background-color: #ffff9d;
+  color: green;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  margin: 2px 20px;
+  cursor: pointer;
+  border-radius: 40px;
 }
