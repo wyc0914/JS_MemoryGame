@@ -33,7 +33,8 @@ function App() {
   return (
   <section className="game_board">
   <header className="App-header">
-    <p>Card Memory Game</p>
+    <p className="Title">Card Memory Game</p>
+    <button className='button'>New Game</button>
     <table>
       <tbody>
         <div className="memory_card">
