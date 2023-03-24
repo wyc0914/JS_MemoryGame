@@ -1,22 +1,28 @@
 import './App.css';
 import Cards from './Cards.js';
 import { useState } from 'react';
-//testing commit
+
+function ShuffleCard(cards) {
+  const ShuffleCard = [...cards]
+  ShuffleCard.sort(() => Math.random() - 0.5); 
+  return ShuffleCard;
+}
+
 function App() {
-  const [cards, setcards] = useState([
-    {id: 1, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 2, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 3, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 4, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 5, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 6, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 7, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 8, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 9, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 10, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 11, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-    {id: 12, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088278674937233489/image.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
-  ]);
+  const [cards, setcards] = useState(ShuffleCard([
+    {id: 1, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 2, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 3, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 4, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 5, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 6, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 7, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 8, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 9, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 10, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 11, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+    {id: 12, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088275098705866802/image.png',  matched: false, flipped: false},
+  ]));
 
   const flipCard = (id) => {
     setcards(cards => cards.map(card => {
@@ -27,6 +33,7 @@ function App() {
   return (
   <section className="game_board">
   <header className="App-header">
+    <p>Card Memory Game</p>
     <table>
       <tbody>
         <div className="memory_card">
