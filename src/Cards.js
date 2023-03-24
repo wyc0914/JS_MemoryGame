@@ -1,13 +1,20 @@
-function Cards({id, cardback, matched}) {
-    return <td><img src={cardback}/></td>
-}
+import React from "react";
+import { useState } from "react";
 
-const cards = document.querySelectorAll('game-board');
-
-function flipCard() {
-    console.log('clicked');
-    console.long(this);
+function Cards({id, cardback, cardfront, matched, flipped, onClick}) {
+    const handleClick = () => {
+        console.log(`Clicked on image with ID ${id}`);
+        onClick(id);
+    }
+    return (
+        <td>
+          <img src={flipped ? cardfront : cardback} alt="card back" id={id} onClick={handleClick} />
+        </td>
+    );
 }
-cards.forEach(cards => cards.addEventListener('click', flipCard));
+  
+
+  
+
 
 export default Cards;
