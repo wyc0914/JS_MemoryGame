@@ -56,6 +56,7 @@ function App() {
         setComparing(true);
         setAttempts((prevState) => prevState + 0.5);
         if (isMatch(flippedCards[0].id, flippedCards[1].id, prevState)) {//check the two flipped cards are matched
+          setTimeout(() => {
           const updatedCards = prevState.map((card) => {
             if (card.id === flippedCards[0].id || card.id === flippedCards[1].id) {
               setComparing(false);
@@ -67,11 +68,12 @@ function App() {
 
           if (winCondition(updatedCards)) {
             setTimeout(() => {
-              alert("YOU HAVE WON!!!");
+              alert("Congratulations!!, You WON!!!\n I know you’ve worked so hard for this");
               newGame();
-            }, 500);
+            }, 200);
           }
-          return updatedCards;
+          setcards(updatedCards);
+        }, 500);//Delay for matched card to stay visible
 
         } else {
           //two selected cards are not a match
@@ -104,41 +106,36 @@ function App() {
         <table>
           <tbody>
             <tr>
-              <td className="newGameButton">
+              <td className="newGameButton" colSpan="1">
                 <button className='button' onClick={newGame}>New Game</button>
               </td>
+              <td className="attemptCounter" colSpan="3">Attempts: {attempts}</td>
             </tr>
             <tr>
-              <td className="attemptCounter">Attempts: {attempts}</td>
-            </tr>
-            <ul className="cards">
-            <tr>
-              <td>
-                {cards.slice(0, 4).map((card) => (
+              {cards.slice(0, 4).map((card) => (
+                <td className='cards'>
                   <Cards id={card.id} cardback={card.cardback} cardfront={card.cardfront} matched={card.matched} flipped={card.flipped} flipCard={flipCard}/>
-                ))}
-              </td>
+                </td>
+              ))}
             </tr>
             <tr>
-              <td>
-                {cards.slice(4, 8).map((card) => (
+              {cards.slice(4, 8).map((card) => (
+                <td className='cards'>
                   <Cards id={card.id} cardback={card.cardback} cardfront={card.cardfront} matched={card.matched} flipped={card.flipped} flipCard={flipCard}/>
-                ))}
-              </td>
+                </td>
+              ))}
             </tr>
             <tr>
-              <td>
-                {cards.slice(8, 12).map((card) => (
+              {cards.slice(8, 12).map((card) => (
+                <td className='cards'>
                   <Cards id={card.id} cardback={card.cardback} cardfront={card.cardfront} matched={card.matched} flipped={card.flipped} flipCard={flipCard}/>
-                ))}
-              </td>
+                </td>
+              ))}
             </tr>
-            </ul>
           </tbody>
         </table>
       </header>
     </section>
-  );
-
+  );  
 }
 export default App;
