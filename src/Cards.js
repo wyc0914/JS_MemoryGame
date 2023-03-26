@@ -1,20 +1,16 @@
 import React from "react";
-import { useState } from "react";
 
-function Cards({id, cardback, cardfront, matched, flipped, onClick}) {
-    const handleClick = () => {
+function Cards({id, cardback, cardfront, matched, flipped, flipCard}) {
+    const handleClick = (card) => {
         console.log(`Clicked on image with ID ${id}`);
-        onClick(id);
+        flipCard(id);
     }
+
     return (
         <td>
-          <img src={flipped ? cardfront : cardback} alt="card back" id={id} onClick={handleClick} />
+          <img src={flipped || matched ? cardfront : cardback} alt="card" id={id} onClick={handleClick} />
         </td>
     );
 }
   
-
-  
-
-
 export default Cards;
