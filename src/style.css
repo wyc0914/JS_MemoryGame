@@ -1,24 +1,2 @@
-.memory_card {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
-  }
-  
-  .memory_card.flipped {
-    transform: rotateY(180deg);
-  }
-  
-  .memory_card .front,
-  .memory_card .back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-  }
-  
-  .memory_card .back {
-    transform: rotateY(180deg);
-  }
+
   
