@@ -29,6 +29,10 @@ const newCards = () => [
 
 function App() {
   const [cards, setcards] = useState(ShuffleCard(newCards()));
+
+  function winCondition(cards) {
+    return cards.every(card => card.matched);
+  }
   
   //check the two selected cards for a matching cardfront, return true for a match and false otherwise
   function isMatch(cardId1, cardId2, cards) {
@@ -43,7 +47,7 @@ function App() {
   const flipCard = (id) => {
     if (comparing) return;//click is disabled when two cards are comparing
     setcards((prevState) => prevState.map((card) => {
-      return card.id === id ? { ...card, flipped: !card.flipped } : card;
+      return card.id === id ? {...card, flipped: !card.flipped} : card;
     }));
   
     setcards((prevState) => {
@@ -52,21 +56,30 @@ function App() {
         setComparing(true);
         setAttempts((prevState) => prevState + 0.5);
         if (isMatch(flippedCards[0].id, flippedCards[1].id, prevState)) {//check the two flipped cards are matched
-          return prevState.map((card) => {
+          const updatedCards = prevState.map((card) => {
             if (card.id === flippedCards[0].id || card.id === flippedCards[1].id) {
               setComparing(false);
-              return { ...card, matched: true, flipped: false };//change matched to true and flipped to false
+              return {...card, matched: true, flipped: false};//change matched to true and flipped to false
             } else {
               return card;
             }
           });
+
+          if (winCondition(updatedCards)) {
+            setTimeout(() => {
+              alert("YOU HAVE WON!!!");
+              newGame();
+            }, 500);
+          }
+          return updatedCards;
+
         } else {
           //two selected cards are not a match
           setTimeout(() => {
             setComparing(false);//clicking back after comparing
             setcards((prevState) => prevState.map((card) => {
               if (card.flipped && !card.matched) {
-                return { ...card, flipped: false };//set flipped to back to false if cards are not matched
+                return {...card, flipped: false};//set flipped to back to false if cards are not matched
               } else {
                 return card;
               }
