@@ -13,6 +13,13 @@
   color: white;
 }
 
+.cards {
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .Title {
   font-family: "Lucida Console", "Courier New", monospace;
   color:yellow;
