@@ -12,8 +12,7 @@ function ShuffleCard(cards) {
   return ShuffleCard;
 }
 
-function App() {
-  const [cards, setcards] = useState(ShuffleCard([
+const newCards = () => [
     {id: 1, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088274786620285018/image.png',  matched: false, flipped: false},
     {id: 2, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088274786620285018/image.png',  matched: false, flipped: false},
     {id: 3, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088274151594266664/image.png',  matched: false, flipped: false},
@@ -26,7 +25,10 @@ function App() {
     {id: 10, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088274604256153690/image.png',  matched: false, flipped: false},
     {id: 11, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088274688268042377/image.png',  matched: false, flipped: false},
     {id: 12, cardback: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088876991526223882/CardBack.png', cardfront: 'https://cdn.discordapp.com/attachments/1077038540359221258/1088274688268042377/image.png',  matched: false, flipped: false},
-  ]));
+];
+
+function App() {
+  const [cards, setcards] = useState(ShuffleCard(newCards()));
   
   //check the two selected cards for a matching cardfront, return true for a match and false otherwise
   function isMatch(cardId1, cardId2, cards) {
@@ -34,6 +36,8 @@ function App() {
     const {cardfront: cardfront2} = cards.find(card => card.id === cardId2);
     return cardfront1 === cardfront2;
   }
+
+  const [attempts, setAttempts] = useState(0);
 
   const flipCard = (id) => {
     setcards((prevState) => prevState.map((card) => {
@@ -43,6 +47,7 @@ function App() {
     setcards((prevState) => {
       const flippedCards = prevState.filter((card) => card.flipped && !card.matched);//filter out cards that is flipped and not matched
       if (flippedCards.length === 2) {
+        setAttempts((prevState) => prevState + 0.5);
         if (isMatch(flippedCards[0].id, flippedCards[1].id, prevState)) {//check the two flipped cards are matched
           return prevState.map((card) => {
             if (card.id === flippedCards[0].id || card.id === flippedCards[1].id) {
@@ -68,6 +73,11 @@ function App() {
     });
   };
 
+  const newGame = () => {
+    setcards(ShuffleCard(newCards()));
+    setAttempts(0);
+  };
+
   return (
     <section className="game_board">
       <header className="App-header">
@@ -76,11 +86,11 @@ function App() {
           <tbody>
             <tr>
               <td className="newGameButton">
-                <button className='button' onClick={ShuffleCard}>New Game</button>
+                <button className='button' onClick={newGame}>New Game</button>
               </td>
             </tr>
             <tr>
-              <td className="attemptCounter">Attempts:</td>
+              <td className="attemptCounter">Attempts: {attempts}</td>
             </tr>
             <ul className="cards">
             <tr>
