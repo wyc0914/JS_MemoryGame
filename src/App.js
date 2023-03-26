@@ -54,7 +54,7 @@ function App() {
       const flippedCards = prevState.filter((card) => card.flipped && !card.matched);//filter out cards that is flipped and not matched
       if (flippedCards.length === 2) {
         setComparing(true);
-        setAttempts((prevState) => prevState + 1);
+        setAttempts((prevState) => prevState + (flippedCards.length % 2));//add 1 to the counter when a pair of cards is flipped
         if (isMatch(flippedCards[0].id, flippedCards[1].id, prevState)) {//check the two flipped cards are matched
           setTimeout(() => {
           const updatedCards = prevState.map((card) => {
