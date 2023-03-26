@@ -38,8 +38,10 @@ function App() {
   }
 
   const [attempts, setAttempts] = useState(0);
+  const [comparing, setComparing] = useState(false);
 
   const flipCard = (id) => {
+    if (comparing) return;//click is disabled when two cards are comparing
     setcards((prevState) => prevState.map((card) => {
       return card.id === id ? { ...card, flipped: !card.flipped } : card;
     }));
@@ -47,10 +49,12 @@ function App() {
     setcards((prevState) => {
       const flippedCards = prevState.filter((card) => card.flipped && !card.matched);//filter out cards that is flipped and not matched
       if (flippedCards.length === 2) {
+        setComparing(true);
         setAttempts((prevState) => prevState + 0.5);
         if (isMatch(flippedCards[0].id, flippedCards[1].id, prevState)) {//check the two flipped cards are matched
           return prevState.map((card) => {
             if (card.id === flippedCards[0].id || card.id === flippedCards[1].id) {
+              setComparing(false);
               return { ...card, matched: true, flipped: false };//change matched to true and flipped to false
             } else {
               return card;
@@ -59,6 +63,7 @@ function App() {
         } else {
           //two selected cards are not a match
           setTimeout(() => {
+            setComparing(false);//clicking back after comparing
             setcards((prevState) => prevState.map((card) => {
               if (card.flipped && !card.matched) {
                 return { ...card, flipped: false };//set flipped to back to false if cards are not matched
@@ -75,6 +80,7 @@ function App() {
 
   const newGame = () => {
     setcards(ShuffleCard(newCards()));
+    setComparing(false);
     setAttempts(0);
   };
 
