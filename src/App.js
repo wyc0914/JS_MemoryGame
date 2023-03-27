@@ -46,18 +46,18 @@ function App() {
 
   const flipCard = (id) => {
     if (comparing) return;//click is disabled when two cards are comparing
-    setcards((prevState) => prevState.map((card) => {
+    setcards((previousState) => previousState.map((card) => {
       return card.id === id ? {...card, flipped: !card.flipped} : card;
     }));
   
-    setcards((prevState) => {
-      const flippedCards = prevState.filter((card) => card.flipped && !card.matched);//filter out cards that is flipped and not matched
+    setcards((previousState) => {
+      const flippedCards = previousState.filter((card) => card.flipped && !card.matched);//filter out cards that is flipped and not matched
       if (flippedCards.length === 2) {
         setComparing(true);
-        setAttempts((prevState) => prevState + 1);
-        if (isMatch(flippedCards[0].id, flippedCards[1].id, prevState)) {//check the two flipped cards are matched
+        setAttempts((previousState) => previousState + 1);
+        if (isMatch(flippedCards[0].id, flippedCards[1].id, previousState)) {//check the two flipped cards are matched
           setTimeout(() => {
-          const updatedCards = prevState.map((card) => {
+          const newBoardState = previousState.map((card) => {
             if (card.id === flippedCards[0].id || card.id === flippedCards[1].id) {
               setComparing(false);
               return {...card, matched: true, flipped: false};//change matched to true and flipped to false
@@ -66,20 +66,20 @@ function App() {
             }
           });
 
-          if (winCondition(updatedCards)) {
+          if (winCondition(newBoardState)) {
             setTimeout(() => {
-              alert("Congratulations!!, You WON!!!\n I know you’ve worked so hard for this");
+              alert("Congratulations!!, You WON!!!\n I know you’ve worked so hard for this!");
               newGame();
             }, 200);
           }
-          setcards(updatedCards);
+          setcards(newBoardState);
         }, 500);//Delay for matched card to stay visible
 
         } else {
           //two selected cards are not a match
           setTimeout(() => {
             setComparing(false);//clicking back after comparing
-            setcards((prevState) => prevState.map((card) => {
+            setcards((previousState) => previousState.map((card) => {
               if (card.flipped && !card.matched) {
                 return {...card, flipped: false};//set flipped to back to false if cards are not matched
               } else {
@@ -89,7 +89,7 @@ function App() {
           }, 700);//delay time
         }
       }
-      return prevState;
+      return previousState;
     });
   };
 
